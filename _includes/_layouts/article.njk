@@ -129,6 +129,11 @@ layout: _layouts/base.njk
 
   .article-body p { margin-bottom: 1.4rem; }
 
+  .article-body p:has(img) {
+    overflow: visible;
+    max-width: none;
+  }
+
   .article-body a {
     color: var(--accent);
     text-decoration: underline;
@@ -166,10 +171,20 @@ layout: _layouts/base.njk
   }
 
   .article-body img {
-    max-width: 100%;
+    position: relative;
+    left: calc(-14rem);
+    width: calc(100% + 28rem);
+    max-width: none;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     display: block;
+  }
+
+  @media (max-width: 900px) {
+    .article-body img {
+      position: static;
+      width: 100%;
+    }
   }
 
   .article-body code {

@@ -54,7 +54,7 @@ title: Home
 
   .section-label {
     font-family: var(--font-serif);
-    font-size: 1.05rem;
+    font-size: 2.1rem;
     font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -188,33 +188,22 @@ title: Home
   }
 
   .service-block {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    padding: 4.5rem 0;
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 0;
     border-bottom: 1px solid var(--border);
   }
 
   .service-block:first-of-type { padding-top: 0; }
   .service-block:last-of-type { border-bottom: none; }
 
-  .service-block--alt .service-image { order: 2; }
-  .service-block--alt .service-content { order: 1; }
-
-  /* Placeholder — replace figure contents with <img> when photos are ready */
   .service-image {
-    aspect-ratio: 4 / 3;
-    background:
-      linear-gradient(rgba(184, 147, 90, 0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(184, 147, 90, 0.055) 1px, transparent 1px),
-      linear-gradient(135deg, #f4eee5 0%, #ece3d6 100%);
-    background-size: 28px 28px, 28px 28px, 100% 100%;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    margin: 0 0 3rem;
     border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
   }
 
   .service-image img {
@@ -224,26 +213,44 @@ title: Home
     display: block;
   }
 
-  .placeholder-icon { width: 40px; height: 40px; }
+  .service-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 4rem 3.5rem 2.5rem;
+    background: linear-gradient(transparent, rgba(20, 16, 12, 0.62));
+    display: flex;
+    align-items: flex-end;
+    gap: 1.75rem;
+  }
 
   .service-number {
-    display: block;
     font-size: 0.62rem;
     font-weight: 300;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.25rem;
+    color: rgba(249, 247, 243, 0.55);
+    flex-shrink: 0;
+    padding-bottom: 0.25rem;
   }
 
   .service-title {
     font-family: var(--font-serif);
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 300;
-    color: var(--text-1);
-    line-height: 1.15;
-    margin-bottom: 0.5rem;
+    color: #f9f7f3;
+    line-height: 1.1;
     letter-spacing: 0.01em;
+    margin: 0;
+  }
+
+  .service-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 5rem;
+    align-items: start;
   }
 
   .service-subtitle {
@@ -254,6 +261,7 @@ title: Home
     text-transform: uppercase;
     color: var(--accent-rose);
     margin-bottom: 1.75rem;
+    grid-column: 1;
   }
 
   .service-desc {
@@ -263,11 +271,18 @@ title: Home
     line-height: 1.85;
     letter-spacing: 0.01em;
     margin-bottom: 1.75rem;
+    grid-column: 1;
+  }
+
+  .service-cta-wrap {
+    grid-column: 1;
   }
 
   .service-includes {
     list-style: none;
     margin-bottom: 2rem;
+    grid-column: 2;
+    grid-row: 1 / 4;
   }
 
   .service-includes li {
@@ -300,6 +315,7 @@ title: Home
     padding-bottom: 0.35rem;
     border-bottom: 1px solid var(--accent);
     transition: color 0.25s, letter-spacing 0.35s ease;
+    grid-column: 1;
   }
 
   .service-cta:hover {
@@ -308,13 +324,23 @@ title: Home
   }
 
   @media (max-width: 900px) {
-    .service-block {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      padding: 3rem 0;
+    .service-block { padding: 3rem 0; }
+    .service-image { aspect-ratio: 4 / 3; margin-bottom: 2rem; }
+    .service-image-caption { padding: 3rem 1.5rem 1.5rem; gap: 1rem; }
+    .service-title { font-size: clamp(1.75rem, 6vw, 2.25rem); }
+    .service-content { grid-template-columns: 1fr; column-gap: 0; }
+    .service-subtitle, .service-desc, .service-cta { grid-column: 1; }
+    .service-includes { grid-column: 1; grid-row: auto; }
+  }
+
+  @media (max-width: 640px) {
+    .service-image {
+      position: relative;
+      left: calc(-1 * var(--page-pad));
+      width: calc(100% + 2 * var(--page-pad));
+      border-left: none;
+      border-right: none;
     }
-    .service-block--alt .service-image { order: 0; }
-    .service-block--alt .service-content { order: 1; }
   }
 
   /* ── About ───────────────────────────────────────────── */
@@ -323,7 +349,19 @@ title: Home
   }
 
   .about-content {
-    max-width: 680px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
+    border: 1px solid var(--border);
+    display: block;
   }
 
   .about-text {
@@ -335,6 +373,19 @@ title: Home
   }
 
   .about-text p { margin-bottom: 1.4rem; }
+
+  @media (max-width: 900px) {
+    .about-content { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-image { aspect-ratio: 4 / 3; }
+  }
+
+  @media (max-width: 640px) {
+    .about-image {
+      position: relative;
+      left: calc(-1 * var(--page-pad));
+      width: calc(100% + 2 * var(--page-pad));
+    }
+  }
 
   @media (max-width: 640px) {
     .articles-grid { grid-template-columns: 1fr; }
@@ -358,12 +409,14 @@ title: Home
   </div>
 
   <div class="service-block">
-    <figure class="service-image" aria-label="Full project interior design">
-      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop&crop=center&auto=format" alt="Interior design project with natural light and elegant finishes">
+    <figure class="service-image">
+      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1440&h=630&fit=crop&crop=center&auto=format" alt="Interior design project with natural light and elegant finishes">
+      <div class="service-image-caption">
+        <span class="service-number">01</span>
+        <h2 class="service-title" data-i18n="s1title">Full Project</h2>
+      </div>
     </figure>
     <div class="service-content">
-      <span class="service-number">01</span>
-      <h2 class="service-title" data-i18n="s1title">Full Project</h2>
       <span class="service-subtitle" data-i18n="s1sub">Design &middot; Construction &middot; Management</span>
       <p class="service-desc" data-i18n="s1desc">From the first sketch to the final finish, we guide every phase of your project. Our comprehensive service covers spatial planning, material selection, contractor coordination, and on-site management &mdash; ensuring your vision is realised with precision and care, on time and to budget.</p>
       <ul class="service-includes">
@@ -377,13 +430,15 @@ title: Home
     </div>
   </div>
 
-  <div class="service-block service-block--alt">
-    <figure class="service-image" aria-label="Turnkey design for construction">
-      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop&crop=center&auto=format" alt="Modern architectural interior with clean lines and premium materials">
+  <div class="service-block">
+    <figure class="service-image">
+      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1440&h=630&fit=crop&crop=center&auto=format" alt="Modern architectural interior with clean lines and premium materials">
+      <div class="service-image-caption">
+        <span class="service-number">02</span>
+        <h2 class="service-title" data-i18n="s2title">Turnkey Design</h2>
+      </div>
     </figure>
     <div class="service-content">
-      <span class="service-number">02</span>
-      <h2 class="service-title" data-i18n="s2title">Turnkey Design</h2>
       <span class="service-subtitle" data-i18n="s2sub">For Constructors &amp; Developers</span>
       <p class="service-desc" data-i18n="s2desc">We partner with construction companies and developers to deliver complete interior design packages ready for immediate execution. Our documentation, specifications, and material schedules are built for efficiency &mdash; allowing your teams to build with confidence from day one.</p>
       <ul class="service-includes">
@@ -397,12 +452,14 @@ title: Home
   </div>
 
   <div class="service-block">
-    <figure class="service-image" aria-label="Interior design consulting">
-      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop&crop=center&auto=format" alt="Interior design consultation with architectural drawings and materials">
+    <figure class="service-image">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1440&h=630&fit=crop&crop=center&auto=format" alt="Interior design consultation with architectural drawings and materials">
+      <div class="service-image-caption">
+        <span class="service-number">03</span>
+        <h2 class="service-title" data-i18n="s3title">Consulting</h2>
+      </div>
     </figure>
     <div class="service-content">
-      <span class="service-number">03</span>
-      <h2 class="service-title" data-i18n="s3title">Consulting</h2>
       <span class="service-subtitle" data-i18n="s3sub">Expert Guidance, On Demand</span>
       <p class="service-desc" data-i18n="s3desc">Not every project requires a full design engagement. Our consulting service provides targeted expertise &mdash; space planning, material advice, project review, or a second opinion &mdash; delivered with the depth of a full studio relationship and the flexibility to meet you where you are.</p>
       <ul class="service-includes">
@@ -428,6 +485,7 @@ title: Home
       <p data-i18n="aboutP2">Our work balances timeless elegance with contemporary sensibility — drawing on classical principles while embracing modern materials and techniques. We collaborate closely with clients, craftsmen, and contractors to ensure that every project is realised with precision and care.</p>
       <p data-i18n="aboutP3">Based in Geneva, we work across Switzerland and internationally, bringing the same level of attention and craftsmanship to every scale of project, from intimate residential renovations to large-scale commercial developments.</p>
     </div>
+    <img src="{{ '/assets/images/helena.jpg' | url }}" alt="Helena studio" class="about-image">
   </div>
 </section>
 
