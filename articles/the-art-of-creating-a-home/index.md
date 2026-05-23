@@ -1,13 +1,15 @@
 ---
 title: The Art of Creating a Home
 date: 2026-05-23
+contentVersion: 1
 summary: A great interior begins not with furniture or finishes, but with a feeling. We explore the principles that guide our approach to creating spaces that are both beautiful and deeply personal.
 tags: [philosophy]
 layout: _layouts/article.njk
-permalink: /articles/the-art-of-creating-a-home/
 ---
 
 Every space has a story waiting to be told. As designers and architects, our role is not simply to arrange furniture or select fabrics — it is to listen to the people who will inhabit a space, and translate their lives, memories, and aspirations into something tangible and enduring.
+
+![Interior design project with natural light and elegant finishes](https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop&crop=center&auto=format)
 
 ## Beginning with Feeling
 

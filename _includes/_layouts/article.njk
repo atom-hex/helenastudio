@@ -70,6 +70,24 @@ layout: _layouts/base.njk
     color: var(--text-3);
   }
 
+  .article-contact {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-1);
+    text-decoration: none;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--accent);
+    transition: color 0.25s, letter-spacing 0.35s ease;
+    margin-top: 1rem;
+  }
+
+  .article-contact:hover {
+    color: var(--accent);
+    letter-spacing: 0.28em;
+  }
+
   .article-summary {
     margin-top: 1.25rem;
     font-family: var(--font-serif);
@@ -196,16 +214,27 @@ layout: _layouts/base.njk
     </div>
     {% endif %}
 
-    <h1 class="article-title">{{ title }}</h1>
+    <h1 class="article-title" data-orig="{{ title | escape }}">{{ title }}</h1>
 
     <div class="article-meta">{{ page.date | date("LLLL dd, yyyy") }}</div>
 
+    <a href="mailto:hello@helena.studio" class="article-contact">hello@helena.studio</a>
+
     {% if summary %}
-    <p class="article-summary">{{ summary }}</p>
+    <p class="article-summary" data-orig="{{ summary | escape }}">{{ summary }}</p>
     {% endif %}
   </div>
 
-  <div class="article-body">
+  <div class="article-body" id="article-body-en">
     {{ content | safe }}
   </div>
+  {% if translations %}
+    {% for lang, trans in translations %}
+  <div class="article-body" id="article-body-{{ lang }}" hidden>{{ trans.body | safe }}</div>
+    {% endfor %}
+  {% endif %}
+  <script>
+  window._artLangs={en:{title:{{ title | dump | safe }},summary:{{ summary | dump | safe }}}{% if translations %}{% for lang, trans in translations %},{{ lang | dump | safe }}:{title:{{ trans.title | dump | safe }},summary:{{ trans.summary | dump | safe }}}{% endfor %}{% endif %}};
+  window._artUrl={{ page.url | dump | safe }};
+  </script>
 </article>

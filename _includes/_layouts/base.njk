@@ -15,15 +15,15 @@
       --bg:          #f9f7f3;
       --bg-warm:     #f3ede3;
       --bg-card:     #fffcf8;
-      --accent:      #b8935a;
-      --accent-rose: #c9a5a5;
-      --accent-dim:  rgba(184, 147, 90, 0.09);
-      --rose-dim:    rgba(201, 165, 165, 0.12);
+      --accent:      #9a7538;
+      --accent-rose: #a87676;
+      --accent-dim:  rgba(154, 117, 56, 0.09);
+      --rose-dim:    rgba(168, 118, 118, 0.12);
       --text-1:      #1c1814;
       --text-2:      #6a5e54;
-      --text-3:      #a8988a;
-      --border:      rgba(184, 147, 90, 0.2);
-      --border-rose: rgba(201, 165, 165, 0.25);
+      --text-3:      #7a6b5e;
+      --border:      rgba(154, 117, 56, 0.25);
+      --border-rose: rgba(168, 118, 118, 0.3);
       --radius:      3px;
       --font-serif:  'Cormorant Garamond', Georgia, serif;
       --font-sans:   'Jost', system-ui, sans-serif;
@@ -82,17 +82,31 @@
 
     /* ── Header ─────────────────────────────────────────── */
     header {
-      padding: 2.25rem 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249, 247, 243, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 1.5rem 0;
       border-bottom: 1px solid var(--border);
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
       gap: 2rem;
+      margin: 0 -2rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
     }
 
     .site-title {
       font-family: var(--font-serif);
-      font-size: 1.5rem;
+      font-size: 3rem;
       font-weight: 400;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -102,6 +116,18 @@
     }
 
     .site-title:hover { color: var(--accent); }
+
+    .header-contact {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      text-decoration: none;
+      margin-top: 0.25rem;
+      transition: color 0.25s;
+    }
+
+    .header-contact:hover { color: var(--accent); }
 
     .header-tagline {
       font-family: var(--font-sans);
@@ -222,7 +248,10 @@
 
   <div class="page-wrap">
     <header>
-      <a href="{{ '/' | url }}" class="site-title">{{ site.title }}</a>
+      <div class="header-left">
+        <a href="{{ '/' | url }}" class="site-title">{{ site.title }}</a>
+        <a href="mailto:hello@helena.studio" class="header-contact">hello@helena.studio</a>
+      </div>
       <div class="header-right">
         <span class="header-tagline" data-i18n="tagline">Interior Design &amp; Architecture</span>
         <div class="lang-switcher" role="group" aria-label="Language">
@@ -249,16 +278,98 @@
   <script>
   (function(){
     var t={
-      en:{tagline:'Interior Design & Architecture',heroLine1:'Spaces that',heroEm:'speak to the soul.',services:'Services',portfolio:'Portfolio',read:'Read',s1title:'Full Project',s1sub:'Design · Construction · Management',s1cta:'Start a project',s2title:'Turnkey Design',s2sub:'For Constructors & Developers',s2cta:'Work with us',s3title:'Consulting',s3sub:'Expert Guidance, On Demand',s3cta:'Book a session'},
-      fr:{tagline:'Design d’intérieur & Architecture',heroLine1:'Des espaces qui',heroEm:'parlent à l’âme.',services:'Services',portfolio:'Portfolio',read:'Lire',s1title:'Projet Complet',s1sub:'Design · Construction · Gestion',s1cta:'Démarrer un projet',s2title:'Design Clé en Main',s2sub:'Pour Constructeurs & Promoteurs',s2cta:'Travailler avec nous',s3title:'Conseil',s3sub:'Expertise sur Mesure',s3cta:'Prendre rendez-vous'},
-      es:{tagline:'Diseño de interiores & Arquitectura',heroLine1:'Espacios que',heroEm:'hablan al alma.',services:'Servicios',portfolio:'Portafolio',read:'Leer',s1title:'Proyecto Completo',s1sub:'Diseño · Construcción · Gestión',s1cta:'Iniciar un proyecto',s2title:'Diseño Llave en Mano',s2sub:'Para Constructores & Promotores',s2cta:'Trabajar con nosotros',s3title:'Consultoría',s3sub:'Orientación Experta',s3cta:'Reservar sesión'},
-      ptbr:{tagline:'Design de interiores & Arquitectura',heroLine1:'Espaços que',heroEm:'falam à alma.',services:'Serviços',portfolio:'Portfólio',read:'Ler',s1title:'Projecto Completo',s1sub:'Design · Construção · Gestão',s1cta:'Iniciar um projecto',s2title:'Design Chave-na-Mão',s2sub:'Para Construtores & Promotores',s2cta:'Trabalhar connosco',s3title:'Consultoria',s3sub:'Orientação Especializada',s3cta:'Marcar sessão'}
+      en:{
+        tagline:'Interior Design & Architecture',heroLine1:'Spaces that',heroEm:'speak to the soul.',
+        heroSub:'Crafting refined interiors and architectural spaces that reflect your vision and the way you live.',
+        services:'Services',about:'About',portfolio:'Portfolio',read:'Read',
+        aboutP1:'Helena is an interior design and architecture studio founded on the belief that spaces should reflect the people who inhabit them. With over a decade of experience across residential, commercial, and hospitality projects, we bring a thoughtful, detail-oriented approach to every commission.',
+        aboutP2:'Our work balances timeless elegance with contemporary sensibility — drawing on classical principles while embracing modern materials and techniques. We collaborate closely with clients, craftsmen, and contractors to ensure that every project is realised with precision and care.',
+        aboutP3:'Based in Geneva, we work across Switzerland and internationally, bringing the same level of attention and craftsmanship to every scale of project, from intimate residential renovations to large-scale commercial developments.',
+        s1title:'Full Project',s1sub:'Design · Construction · Management',s1cta:'Start a project',
+        s1desc:'From the first sketch to the final finish, we guide every phase of your project. Our comprehensive service covers spatial planning, material selection, contractor coordination, and on-site management — ensuring your vision is realised with precision and care, on time and to budget.',
+        s1i1:'Concept design & spatial planning',s1i2:'Material, finish & furniture specification',s1i3:'Contractor sourcing & coordination',s1i4:'Construction oversight & site visits',s1i5:'Final delivery & styling',
+        s2title:'Turnkey Design',s2sub:'For Constructors & Developers',s2cta:'Work with us',
+        s2desc:'We partner with construction companies and developers to deliver complete interior design packages ready for immediate execution. Our documentation, specifications, and material schedules are built for efficiency — allowing your teams to build with confidence from day one.',
+        s2i1:'Full design documentation & technical drawings',s2i2:'Material & product schedules',s2i3:'Supplier coordination',s2i4:'Fit-out ready handover package',
+        s3title:'Consulting',s3sub:'Expert Guidance, On Demand',s3cta:'Book a session',
+        s3desc:'Not every project requires a full design engagement. Our consulting service provides targeted expertise — space planning, material advice, project review, or a second opinion — delivered with the depth of a full studio relationship and the flexibility to meet you where you are.',
+        s3i1:'Space planning & layout review',s3i2:'Material & palette advice',s3i3:'Project audit & troubleshooting',s3i4:'Single session or ongoing retainer'
+      },
+      fr:{
+        tagline:'Design d’intérieur & Architecture',heroLine1:'Des espaces qui',heroEm:'parlent à l’âme.',
+        heroSub:'Concevoir des intérieurs raffinés et des espaces architecturaux qui reflètent votre vision et votre façon de vivre.',
+        services:'Services',about:'À propos',portfolio:'Portfolio',read:'Lire',
+        aboutP1:'Helena est un studio de design d’intérieur et d’architecture fondé sur la conviction que les espaces doivent refléter les personnes qui les habitent. Fort de plus d’une décennie d’expérience dans des projets résidentiels, commerciaux et hôteliers, nous adoptons une approche réfléchie et soucieuse du détail pour chaque commission.',
+        aboutP2:'Notre travail équilibre élégance intemporelle et sensibilité contemporaine — s’appuyant sur des principes classiques tout en intégrant matériaux et techniques modernes. Nous collaborons étroitement avec nos clients, artisans et entrepreneurs pour que chaque projet soit réalisé avec précision et soin.',
+        aboutP3:'Basé à Genève, nous travaillons à travers la Suisse et à l’international, apportant la même attention et le même savoir-faire à chaque projet, des rénovations résidentielles intimistes aux grands développements commerciaux.',
+        s1title:'Projet Complet',s1sub:'Design · Construction · Gestion',s1cta:'Démarrer un projet',
+        s1desc:'Du premier croquis à la touche finale, nous accompagnons chaque phase de votre projet. Notre service complet couvre la planification spatiale, la sélection des matériaux, la coordination des entrepreneurs et la gestion de chantier — garantissant que votre vision se réalise avec précision et soin, dans les délais et le budget impartis.',
+        s1i1:'Design de concept & planification spatiale',s1i2:'Spécification des matériaux, finitions & mobilier',s1i3:'Recherche & coordination des entrepreneurs',s1i4:'Supervision de la construction & visites de chantier',s1i5:'Livraison finale & stylisme',
+        s2title:'Design Clé en Main',s2sub:'Pour Constructeurs & Promoteurs',s2cta:'Travailler avec nous',
+        s2desc:'Nous nous associons à des entreprises de construction et à des promoteurs pour livrer des packages de design d’intérieur complets, prêts à être mis en œuvre immédiatement. Notre documentation, spécifications et plannings de matériaux sont conçus pour l’efficacité — permettant à vos équipes de construire avec confiance dès le premier jour.',
+        s2i1:'Documentation de design complète & plans techniques',s2i2:'Plannings des matériaux & produits',s2i3:'Coordination des fournisseurs',s2i4:'Package de remise clés en main',
+        s3title:'Conseil',s3sub:'Expertise sur Mesure',s3cta:'Prendre rendez-vous',
+        s3desc:'Tous les projets ne nécessitent pas un accompagnement design complet. Notre service conseil apporte une expertise ciblée — planification spatiale, conseil sur les matériaux, révision de projet ou second avis — avec la profondeur d’une relation de studio complète et la flexibilité de vous rejoindre là où vous en êtes.',
+        s3i1:'Planification spatiale & révision de disposition',s3i2:'Conseil matériaux & palette',s3i3:'Audit de projet & résolution de problèmes',s3i4:'Session unique ou contrat récurrent'
+      },
+      es:{
+        tagline:'Diseño de interiores & Arquitectura',heroLine1:'Espacios que',heroEm:'hablan al alma.',
+        heroSub:'Creando interiores refinados y espacios arquitectónicos que reflejan su visión y su forma de vivir.',
+        services:'Servicios',about:'Sobre nosotros',portfolio:'Portafolio',read:'Leer',
+        aboutP1:'Helena es un estudio de diseño de interiores y arquitectura fundado en la convicción de que los espacios deben reflejar a las personas que los habitan. Con más de una década de experiencia en proyectos residenciales, comerciales y de hostelería, aportamos un enfoque reflexivo y orientado al detalle en cada encargo.',
+        aboutP2:'Nuestro trabajo equilibra la elegancia atemporal con la sensibilidad contemporánea — basándose en principios clásicos mientras incorpora materiales y técnicas modernas. Colaboramos estrechamente con clientes, artesanos y contratistas para garantizar que cada proyecto se ejecute con precisión y dedicación.',
+        aboutP3:'Con sede en Ginebra, trabajamos en toda Suiza e internacionalmente, aportando el mismo nivel de atención y artesanía a cada escala de proyecto, desde renovaciones residenciales íntimas hasta grandes desarrollos comerciales.',
+        s1title:'Proyecto Completo',s1sub:'Diseño · Construcción · Gestión',s1cta:'Iniciar un proyecto',
+        s1desc:'Desde el primer boceto hasta el acabado final, guiamos cada fase de su proyecto. Nuestro servicio integral abarca la planificación espacial, la selección de materiales, la coordinación de contratistas y la gestión in situ — garantizando que su visión se haga realidad con precisión y cuidado, en plazo y dentro del presupuesto.',
+        s1i1:'Diseño conceptual & planificación espacial',s1i2:'Especificación de materiales, acabados & mobiliario',s1i3:'Búsqueda & coordinación de contratistas',s1i4:'Supervisión de construcción & visitas al sitio',s1i5:'Entrega final & estilismo',
+        s2title:'Diseño Llave en Mano',s2sub:'Para Constructores & Promotores',s2cta:'Trabajar con nosotros',
+        s2desc:'Nos asociamos con empresas constructoras y promotores para entregar paquetes completos de diseño de interiores listos para ejecución inmediata. Nuestra documentación, especificaciones y calendarios de materiales están diseñados para la eficiencia — permitiendo que sus equipos construyan con confianza desde el primer día.',
+        s2i1:'Documentación de diseño completa & planos técnicos',s2i2:'Calendarios de materiales & productos',s2i3:'Coordinación de proveedores',s2i4:'Paquete de entrega llave en mano',
+        s3title:'Consultoría',s3sub:'Orientación Experta',s3cta:'Reservar sesión',
+        s3desc:'No todos los proyectos requieren un compromiso de diseño integral. Nuestro servicio de consultoría proporciona experiencia específica — planificación espacial, asesoramiento sobre materiales, revisión de proyecto o segunda opinión — con la profundidad de una relación de estudio completo y la flexibilidad de adaptarse a sus necesidades.',
+        s3i1:'Planificación espacial & revisión de distribución',s3i2:'Asesoramiento de materiales & paleta',s3i3:'Auditoría de proyecto & resolución de problemas',s3i4:'Sesión única o contrato recurrente'
+      },
+      ptbr:{
+        tagline:'Design de interiores & Arquitectura',heroLine1:'Espaços que',heroEm:'falam à alma.',
+        heroSub:'Criando interiores refinados e espaços arquitectónicos que reflectem a sua visão e a sua forma de viver.',
+        services:'Serviços',about:'Sobre nós',portfolio:'Portfólio',read:'Ler',
+        aboutP1:'Helena é um estúdio de design de interiores e arquitectura fundado na crença de que os espaços devem reflectir as pessoas que os habitam. Com mais de uma década de experiência em projectos residenciais, comerciais e de hotelaria, trazemos uma abordagem reflectida e orientada para o detalhe em cada comissão.',
+        aboutP2:'O nosso trabalho equilibra a elegância atemporal com a sensibilidade contemporânea — baseando-se em princípios clássicos enquanto integra materiais e técnicas modernas. Colaboramos estreitamente com clientes, artesãos e empreiteiros para garantir que cada projecto seja realizado com precisão e cuidado.',
+        aboutP3:'Com sede em Genebra, trabalhamos em toda a Suíça e internacionalmente, trazendo o mesmo nível de atenção e artesanato a cada escala de projecto, desde renovações residenciais íntimas a grandes desenvolvimentos comerciais.',
+        s1title:'Projecto Completo',s1sub:'Design · Construção · Gestão',s1cta:'Iniciar um projecto',
+        s1desc:'Desde o primeiro esboço até ao acabamento final, guiamos cada fase do seu projecto. O nosso serviço abrangente cobre o planeamento espacial, a selecção de materiais, a coordenação de empreiteiros e a gestão no local — assegurando que a sua visão seja realizada com precisão e cuidado, a tempo e dentro do orçamento.',
+        s1i1:'Design conceptual & planeamento espacial',s1i2:'Especificação de materiais, acabamentos & mobiliário',s1i3:'Pesquisa & coordenação de empreiteiros',s1i4:'Supervisão de construção & visitas ao local',s1i5:'Entrega final & styling',
+        s2title:'Design Chave-na-Mão',s2sub:'Para Construtores & Promotores',s2cta:'Trabalhar connosco',
+        s2desc:'Trabalhamos em parceria com empresas de construção e promotores para entregar pacotes completos de design de interiores prontos para execução imediata. A nossa documentação, especificações e calendários de materiais são concebidos para a eficiência — permitindo que as suas equipas construam com confiança desde o primeiro dia.',
+        s2i1:'Documentação de design completa & desenhos técnicos',s2i2:'Calendários de materiais & produtos',s2i3:'Coordenação de fornecedores',s2i4:'Pacote de entrega chave-na-mão',
+        s3title:'Consultoria',s3sub:'Orientação Especializada',s3cta:'Marcar sessão',
+        s3desc:'Nem todos os projectos requerem um compromisso de design completo. O nosso serviço de consultoria fornece especialização dirigida — planeamento espacial, aconselhamento sobre materiais, revisão de projectos ou uma segunda opinião — entregue com a profundidade de uma relação de estúdio completa e a flexibilidade de o encontrar onde estiver.',
+        s3i1:'Planeamento espacial & revisão de layout',s3i2:'Conselho de materiais & paleta',s3i3:'Auditoria de projecto & resolução de problemas',s3i4:'Sessão única ou contrato recorrente'
+      }
     };
     function apply(lang){
       var d=t[lang]||t.en;
       document.querySelectorAll('[data-i18n]').forEach(function(el){
         var k=el.dataset.i18n;
         if(d[k]!==undefined) el.textContent=d[k];
+      });
+      if(window._artLangs){
+        var artTr=window._artLangs[lang]||window._artLangs.en;
+        var titleEl=document.querySelector('.article-title');
+        var summEl=document.querySelector('.article-summary');
+        if(titleEl&&artTr.title)titleEl.textContent=artTr.title;
+        if(summEl&&artTr.summary)summEl.textContent=artTr.summary;
+        document.querySelectorAll('.article-body').forEach(function(b){b.hidden=true;});
+        var body=document.getElementById('article-body-'+lang)||document.getElementById('article-body-en');
+        if(body)body.hidden=false;
+      }
+      document.querySelectorAll('[data-article-key]').forEach(function(card){
+        var url=card.dataset.articleKey;
+        var tr=lang!=='en'&&window._articleTrans&&window._articleTrans[url]&&window._articleTrans[url][lang];
+        var t=card.querySelector('[data-card-field="title"]');
+        var s=card.querySelector('[data-card-field="summary"]');
+        if(t)t.textContent=tr&&tr.title?tr.title:(t.dataset.orig||t.textContent);
+        if(s)s.textContent=tr&&tr.summary?tr.summary:(s.dataset.orig||s.textContent);
       });
       document.querySelectorAll('.lang-btn,.flag-split').forEach(function(el){
         el.classList.toggle('active',el.dataset.lang===lang);

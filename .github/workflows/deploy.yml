@@ -32,10 +32,8 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          # Adjust this to match your GitHub repo name if deploying to
-          # https://username.github.io/<repo>/ (project site).
-          # Leave as "/" if deploying to https://username.github.io/ (user site).
-          ELEVENTY_PATH_PREFIX: /helena/
+          # Deploying to helena.studio
+          ELEVENTY_PATH_PREFIX: /
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
