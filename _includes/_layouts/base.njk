@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} — {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if summary %}{{ summary }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f9f7f3;
+      --bg-warm:     #f3ede3;
+      --bg-card:     #fffcf8;
+      --accent:      #b8935a;
+      --accent-rose: #c9a5a5;
+      --accent-dim:  rgba(184, 147, 90, 0.09);
+      --rose-dim:    rgba(201, 165, 165, 0.12);
+      --text-1:      #1c1814;
+      --text-2:      #6a5e54;
+      --text-3:      #a8988a;
+      --border:      rgba(184, 147, 90, 0.2);
+      --border-rose: rgba(201, 165, 165, 0.25);
+      --radius:      3px;
+      --font-serif:  'Cormorant Garamond', Georgia, serif;
+      --font-sans:   'Jost', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      background-color: var(--bg);
+      color: var(--text-1);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── Decorative background ─────────────────────────── */
+    .deco-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Subtle architectural grid — like blueprint paper */
+    .deco-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(184, 147, 90, 0.042) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 147, 90, 0.042) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+
+    /* Radial wash so the grid fades from the centre outward */
+    .deco-wash {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 65% at 50% 10%, var(--bg) 0%, transparent 100%);
+    }
+
+    /* Decorative compass circles — top-right corner */
+    .deco-circle-1 {
+      position: absolute;
+      width: 820px; height: 820px;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 147, 90, 0.1);
+      top: -380px; right: -280px;
+    }
+
+    .deco-circle-2 {
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 165, 165, 0.16);
+      top: -200px; right: -100px;
+    }
+
+    .deco-circle-3 {
+      position: absolute;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 147, 90, 0.14);
+      top: -60px; right: 60px;
+    }
+
+    /* Accent dot — architectural centre mark */
+    .deco-circle-3::after {
+      content: '';
+      position: absolute;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.55;
+    }
+
+    /* Bottom-left accent circle */
+    .deco-circle-4 {
+      position: absolute;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 165, 165, 0.1);
+      bottom: -150px; left: -130px;
+    }
+
+    /* ── Layout ─────────────────────────────────────────── */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    header {
+      padding: 2.25rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .site-title:hover { color: var(--accent); }
+
+    .header-tagline {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ── Main ───────────────────────────────────────────── */
+    main {
+      flex: 1;
+      padding: 4rem 0 5rem;
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    footer {
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--text-3);
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+    }
+
+    footer a {
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Utilities ──────────────────────────────────────── */
+    a { color: var(--accent); }
+
+    :focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 640px) {
+      .page-wrap { padding: 0 1.25rem; }
+      .header-tagline { display: none; }
+      .deco-circle-1 { width: 460px; height: 460px; top: -200px; right: -180px; }
+      .deco-circle-2 { width: 300px; height: 300px; top: -100px; right: -60px; }
+      .deco-circle-3 { width: 160px; height: 160px; top: -20px; right: 20px; }
+      .deco-circle-4 { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deco-bg" aria-hidden="true">
+    <div class="deco-grid"></div>
+    <div class="deco-wash"></div>
+    <div class="deco-circle-1"></div>
+    <div class="deco-circle-2"></div>
+    <div class="deco-circle-3"></div>
+    <div class="deco-circle-4"></div>
+  </div>
+
+  <div class="page-wrap">
+    <header>
+      <a href="{{ '/' | url }}" class="site-title">{{ site.title }}</a>
+      <span class="header-tagline">Interior Design &amp; Architecture</span>
+    </header>
+
+    <main>
+      {{ content | safe }}
+    </main>
+
+    <footer>
+      <span>&copy; {{ currentYear }} {{ site.title }}</span>
+      <span>Interior Design &amp; Architecture</span>
+    </footer>
+  </div>
+</body>
+</html>
