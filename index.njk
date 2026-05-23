@@ -324,17 +324,17 @@ title: Home
 </style>
 
 <section class="hero">
-  <span class="hero-eyebrow">Interior Design &amp; Architecture</span>
+  <span class="hero-eyebrow" data-i18n="tagline">Interior Design &amp; Architecture</span>
   <h1 class="hero-heading">
-    Spaces that<br>
-    <em>speak to the soul.</em>
+    <span data-i18n="heroLine1">Spaces that</span><br>
+    <em data-i18n="heroEm">speak to the soul.</em>
   </h1>
   <p class="hero-sub">{{ site.description }}</p>
 </section>
 
 <section class="services-section">
   <div class="section-header">
-    <span class="section-label">Services</span>
+    <span class="section-label" data-i18n="services">Services</span>
     <div class="section-rule"></div>
   </div>
 
@@ -344,8 +344,8 @@ title: Home
     </figure>
     <div class="service-content">
       <span class="service-number">01</span>
-      <h2 class="service-title">Full Project</h2>
-      <span class="service-subtitle">Design &middot; Construction &middot; Management</span>
+      <h2 class="service-title" data-i18n="s1title">Full Project</h2>
+      <span class="service-subtitle" data-i18n="s1sub">Design &middot; Construction &middot; Management</span>
       <p class="service-desc">From the first sketch to the final finish, we guide every phase of your project. Our comprehensive service covers spatial planning, material selection, contractor coordination, and on-site management &mdash; ensuring your vision is realised with precision and care, on time and to budget.</p>
       <ul class="service-includes">
         <li>Concept design &amp; spatial planning</li>
@@ -354,7 +354,7 @@ title: Home
         <li>Construction oversight &amp; site visits</li>
         <li>Final delivery &amp; styling</li>
       </ul>
-      <a href="mailto:hello@helena.studio" class="service-cta">Start a project</a>
+      <a href="mailto:hello@helena.studio" class="service-cta" data-i18n="s1cta">Start a project</a>
     </div>
   </div>
 
@@ -364,8 +364,8 @@ title: Home
     </figure>
     <div class="service-content">
       <span class="service-number">02</span>
-      <h2 class="service-title">Turnkey Design</h2>
-      <span class="service-subtitle">For Constructors &amp; Developers</span>
+      <h2 class="service-title" data-i18n="s2title">Turnkey Design</h2>
+      <span class="service-subtitle" data-i18n="s2sub">For Constructors &amp; Developers</span>
       <p class="service-desc">We partner with construction companies and developers to deliver complete interior design packages ready for immediate execution. Our documentation, specifications, and material schedules are built for efficiency &mdash; allowing your teams to build with confidence from day one.</p>
       <ul class="service-includes">
         <li>Full design documentation &amp; technical drawings</li>
@@ -373,7 +373,7 @@ title: Home
         <li>Supplier coordination</li>
         <li>Fit-out ready handover package</li>
       </ul>
-      <a href="mailto:hello@helena.studio" class="service-cta">Work with us</a>
+      <a href="mailto:hello@helena.studio" class="service-cta" data-i18n="s2cta">Work with us</a>
     </div>
   </div>
 
@@ -383,8 +383,8 @@ title: Home
     </figure>
     <div class="service-content">
       <span class="service-number">03</span>
-      <h2 class="service-title">Consulting</h2>
-      <span class="service-subtitle">Expert Guidance, On Demand</span>
+      <h2 class="service-title" data-i18n="s3title">Consulting</h2>
+      <span class="service-subtitle" data-i18n="s3sub">Expert Guidance, On Demand</span>
       <p class="service-desc">Not every project requires a full design engagement. Our consulting service provides targeted expertise &mdash; space planning, material advice, project review, or a second opinion &mdash; delivered with the depth of a full studio relationship and the flexibility to meet you where you are.</p>
       <ul class="service-includes">
         <li>Space planning &amp; layout review</li>
@@ -392,14 +392,14 @@ title: Home
         <li>Project audit &amp; troubleshooting</li>
         <li>Single session or ongoing retainer</li>
       </ul>
-      <a href="mailto:hello@helena.studio" class="service-cta">Book a session</a>
+      <a href="mailto:hello@helena.studio" class="service-cta" data-i18n="s3cta">Book a session</a>
     </div>
   </div>
 </section>
 
 <section class="articles-section">
   <div class="section-header">
-    <span class="section-label">Portfolio</span>
+    <span class="section-label" data-i18n="portfolio">Portfolio</span>
     <div class="section-rule"></div>
   </div>
 
@@ -423,7 +423,7 @@ title: Home
 
       <div class="card-footer">
         <span class="card-date">{{ article.date | date("MMM dd, yyyy") }}</span>
-        <span class="card-read">Read</span>
+        <span class="card-read" data-i18n="read">Read</span>
       </div>
     </a>
     {% endfor %}

@@ -195,6 +195,64 @@
       outline-offset: 4px;
     }
 
+    /* ── Header right column ─────────────────────────────── */
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    /* ── Language switcher ────────────────────────────── */
+    .lang-switcher {
+      display: flex;
+      gap: 0.3rem;
+      align-items: center;
+    }
+
+    .lang-btn {
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      opacity: 0.35;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      padding: 1px;
+      border-radius: 2px;
+    }
+
+    .lang-btn:hover { opacity: 0.7; }
+    .lang-btn.active { opacity: 1; }
+
+    /* PT-BR diagonal split flag */
+    .flag-split {
+      position: relative;
+      width: 1.2rem;
+      height: 1rem;
+      overflow: hidden;
+      border-radius: 2px;
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      opacity: 0.35;
+      transition: opacity 0.2s;
+    }
+
+    .flag-split:hover { opacity: 0.7; }
+    .flag-split.active { opacity: 1; }
+
+    .flag-split .fl, .flag-split .fr {
+      position: absolute;
+      font-size: 1.15rem;
+      line-height: 1;
+      top: -0.05rem;
+      left: -0.05rem;
+    }
+
+    .flag-split .fl { clip-path: polygon(0 0, 100% 0, 0 100%); }
+    .flag-split .fr { clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+
     @media (max-width: 640px) {
       .page-wrap { padding: 0 1.25rem; }
       .header-tagline { display: none; }
@@ -218,7 +276,18 @@
   <div class="page-wrap">
     <header>
       <a href="{{ '/' | url }}" class="site-title">{{ site.title }}</a>
-      <span class="header-tagline">Interior Design &amp; Architecture</span>
+      <div class="header-right">
+        <span class="header-tagline" data-i18n="tagline">Interior Design &amp; Architecture</span>
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn active" data-lang="en" title="English">&#x1F1EC;&#x1F1E7;</button>
+          <button class="lang-btn" data-lang="fr" title="Fran&ccedil;ais">&#x1F1EB;&#x1F1F7;</button>
+          <button class="lang-btn" data-lang="es" title="Espa&ntilde;ol">&#x1F1EA;&#x1F1F8;</button>
+          <span class="flag-split" data-lang="ptbr" title="Portugu&ecirc;s" role="button" tabindex="0" aria-label="Português">
+            <span class="fl">&#x1F1E7;&#x1F1F7;</span>
+            <span class="fr">&#x1F1F5;&#x1F1F9;</span>
+          </span>
+        </div>
+      </div>
     </header>
 
     <main>
@@ -227,8 +296,34 @@
 
     <footer>
       <span>&copy; {{ currentYear }} {{ site.title }}</span>
-      <span>Interior Design &amp; Architecture</span>
+      <span data-i18n="tagline">Interior Design &amp; Architecture</span>
     </footer>
   </div>
+  <script>
+  (function(){
+    var t={
+      en:{tagline:'Interior Design & Architecture',heroLine1:'Spaces that',heroEm:'speak to the soul.',services:'Services',portfolio:'Portfolio',read:'Read',s1title:'Full Project',s1sub:'Design · Construction · Management',s1cta:'Start a project',s2title:'Turnkey Design',s2sub:'For Constructors & Developers',s2cta:'Work with us',s3title:'Consulting',s3sub:'Expert Guidance, On Demand',s3cta:'Book a session'},
+      fr:{tagline:'Design d’intérieur & Architecture',heroLine1:'Des espaces qui',heroEm:'parlent à l’âme.',services:'Services',portfolio:'Portfolio',read:'Lire',s1title:'Projet Complet',s1sub:'Design · Construction · Gestion',s1cta:'Démarrer un projet',s2title:'Design Clé en Main',s2sub:'Pour Constructeurs & Promoteurs',s2cta:'Travailler avec nous',s3title:'Conseil',s3sub:'Expertise sur Mesure',s3cta:'Prendre rendez-vous'},
+      es:{tagline:'Diseño de interiores & Arquitectura',heroLine1:'Espacios que',heroEm:'hablan al alma.',services:'Servicios',portfolio:'Portafolio',read:'Leer',s1title:'Proyecto Completo',s1sub:'Diseño · Construcción · Gestión',s1cta:'Iniciar un proyecto',s2title:'Diseño Llave en Mano',s2sub:'Para Constructores & Promotores',s2cta:'Trabajar con nosotros',s3title:'Consultoría',s3sub:'Orientación Experta',s3cta:'Reservar sesión'},
+      ptbr:{tagline:'Design de interiores & Arquitectura',heroLine1:'Espaços que',heroEm:'falam à alma.',services:'Serviços',portfolio:'Portfólio',read:'Ler',s1title:'Projecto Completo',s1sub:'Design · Construção · Gestão',s1cta:'Iniciar um projecto',s2title:'Design Chave-na-Mão',s2sub:'Para Construtores & Promotores',s2cta:'Trabalhar connosco',s3title:'Consultoria',s3sub:'Orientação Especializada',s3cta:'Marcar sessão'}
+    };
+    function apply(lang){
+      var d=t[lang]||t.en;
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var k=el.dataset.i18n;
+        if(d[k]!==undefined) el.textContent=d[k];
+      });
+      document.querySelectorAll('.lang-btn,.flag-split').forEach(function(el){
+        el.classList.toggle('active',el.dataset.lang===lang);
+      });
+      localStorage.setItem('lang',lang);
+      document.documentElement.lang=lang==='ptbr'?'pt-BR':lang;
+    }
+    document.querySelectorAll('.lang-btn,.flag-split').forEach(function(el){
+      el.addEventListener('click',function(){ apply(el.dataset.lang); });
+    });
+    apply(localStorage.getItem('lang')||'en');
+  })();
+  </script>
 </body>
 </html>
