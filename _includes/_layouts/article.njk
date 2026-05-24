@@ -3,7 +3,6 @@ layout: _layouts/base.njk
 ---
 <style>
   .article-header {
-    max-width: 680px;
     margin-bottom: 3rem;
     padding-bottom: 2.5rem;
     border-bottom: 1px solid var(--border);
@@ -96,12 +95,10 @@ layout: _layouts/base.njk
     font-weight: 300;
     color: var(--text-2);
     line-height: 1.65;
-    max-width: 600px;
   }
 
   /* ── Prose ─────────────────────────────────────────── */
   .article-body {
-    max-width: 680px;
     font-size: 1.05rem;
     font-weight: 400;
     line-height: 1.85;
@@ -128,11 +125,6 @@ layout: _layouts/base.njk
   }
 
   .article-body p { margin-bottom: 1.4rem; }
-
-  .article-body p:has(img) {
-    overflow: visible;
-    max-width: none;
-  }
 
   .article-body a {
     color: var(--accent);
@@ -171,20 +163,11 @@ layout: _layouts/base.njk
   }
 
   .article-body img {
-    position: relative;
-    left: calc(-14rem);
-    width: calc(100% + 28rem);
+    display: block;
+    width: 100%;
     max-width: none;
     border-radius: var(--radius);
     border: 1px solid var(--border);
-    display: block;
-  }
-
-  @media (max-width: 900px) {
-    .article-body img {
-      position: static;
-      width: 100%;
-    }
   }
 
   .article-body code {
