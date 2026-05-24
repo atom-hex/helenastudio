@@ -43,10 +43,12 @@ Interior design & architecture studio website built with **Eleventy (v3.1.5)**, 
 ## Key Features
 - Warm ivory theme (Cormorant Garamond serif + Jost sans, all CSS in `base.njk`)
 - Multilingual UI: EN / FR / ES / PT-BR, client-side JS flag switcher, persisted to `localStorage`
-- Sticky header with backdrop blur
-- Sections: hero, services (3 cards), about, portfolio (article cards)
+- Sticky header with backdrop blur; contact email link below site title
+- Sections: hero, services (3 blocks), about (text + portrait photo), portfolio (article cards)
 - Article body per-language via hidden `<div id="article-body-{lang}">` swapped by JS
-- Responsive design, WCAG AA color contrast
+- Responsive design with mobile-first breakpoints at 640px and 900px
+- Base font: `19px` on `html` — all sizing uses `rem`/`em` so it scales proportionally
+- `--page-pad` CSS variable (`2rem` desktop / `0.85rem` mobile) shared by page-wrap padding and header margins
 
 ## Development Workflow
 1. Edit files in `articles/` as `.njk` (Nunjucks) or `.md` or plain `.html`
@@ -88,6 +90,48 @@ Interior design & architecture studio website built with **Eleventy (v3.1.5)**, 
 - `package.json` - Dependencies and scripts
 - `.github/workflows/deploy.yml` - CI/CD: build + deploy to GitHub Pages
 
+## Layout & Responsive Design
+
+### Key CSS values
+- `--page-pad`: `2rem` desktop, `0.85rem` on `≤640px` — defined in `base.njk` `:root`, used by both `.page-wrap { padding }` and `header { margin / padding }`
+- `.page-wrap`: `max-width: 1440px; margin: 0 auto; padding: 0 var(--page-pad)`
+- Base font: `html { font-size: 19px }` — changing this scales the entire site
+- `html { overflow-x: clip }` — prevents iOS Safari from expanding layout width due to overflowing elements
+
+### Full-bleed images on mobile
+Do **not** use `width: 100vw` for full-bleed — it causes layout overflow that breaks centering on iOS.
+Use the relative-position pattern instead:
+```css
+@media (max-width: 640px) {
+  .my-image {
+    position: relative;
+    left: calc(-1 * var(--page-pad));
+    width: calc(100% + 2 * var(--page-pad));
+  }
+}
+```
+
+### Service section layout
+- Each `.service-block` is `flex-direction: column`: full-width image on top, content below
+- `.service-image`: `aspect-ratio: 16/7`, with `.service-image-caption` (title overlay) positioned absolutely at the bottom
+- `.service-content`: two-column grid (`1fr 1fr`): subtitle/desc/CTA on left, bullet list on right
+- Collapses to single column at `≤900px`; images go full-bleed at `≤640px`
+
+### About section layout
+- `.about-content`: two-column grid (`1fr 1fr`): text left, `assets/images/helena.jpg` right
+- Image uses `aspect-ratio: 3/4` (portrait), `object-position: center top`
+- Collapses to single column at `≤900px`; image goes full-bleed at `≤640px`
+
+### Article images
+- Desktop: `position: relative; left: -14rem; width: calc(100% + 28rem)` — breaks out of 680px prose column
+- Mobile (`≤900px`): `position: static; width: 100%`
+
+### Header mobile adjustments (`≤640px`)
+- Site title: `1.1rem`, contact link: `0.55rem`, flags: `1.1rem`, tagline: hidden
+- Padding reduced to `0.85rem` top/bottom
+
+---
+
 ## Guidelines for Changes
 1. **Always run `npm run dev` before testing changes** to see results immediately
 2. **Date filter**: Uses Luxon format tokens (e.g. `'LLLL dd, yyyy'`) — NOT strftime
@@ -97,6 +141,8 @@ Interior design & architecture studio website built with **Eleventy (v3.1.5)**, 
 6. **Test build**: Run `npm run build` locally before committing
 7. **Clean stale build output**: Eleventy v3 has no `--clean` flag; delete `_site/` manually then rebuild
 8. **No explicit permalink needed**: folder name determines URL automatically
+9. **Full-bleed images**: Use the `position: relative; left; width: calc` pattern — never `width: 100vw`
+10. **Scaling text globally**: Change `html { font-size }` in `base.njk` — all rem/em values scale automatically
 
 ---
 
