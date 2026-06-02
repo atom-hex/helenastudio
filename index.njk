@@ -5,28 +5,32 @@ title: Home
 <style>
   /* ── Hero ─────────────────────────────────────────────── */
   .hero {
-    padding-bottom: 4rem;
-    margin-bottom: 4rem;
-    max-width: 680px;
+    padding: 4rem 0 5.5rem;
+    margin-bottom: 5rem;
+    border-bottom: 1px solid var(--border);
   }
 
   .hero-eyebrow {
     display: block;
-    font-size: 0.68rem;
+    font-size: 0.6rem;
     font-weight: 300;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.38em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.75rem;
+    color: var(--text-3);
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    max-width: 380px;
   }
 
   .hero-heading {
     font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(3.25rem, 8vw, 6.5rem);
     font-weight: 300;
-    line-height: 1.1;
+    line-height: 1.0;
     color: var(--text-1);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.25rem;
+    letter-spacing: -0.01em;
   }
 
   .hero-heading em {
@@ -36,12 +40,12 @@ title: Home
   }
 
   .hero-sub {
-    font-size: 1.05rem;
-    font-weight: 400;
+    font-size: 0.98rem;
+    font-weight: 300;
     color: var(--text-2);
-    line-height: 1.8;
-    max-width: 480px;
-    letter-spacing: 0.01em;
+    line-height: 1.95;
+    max-width: 500px;
+    letter-spacing: 0.02em;
   }
 
   /* ── Journal section ─────────────────────────────────── */
@@ -53,12 +57,11 @@ title: Home
   }
 
   .section-label {
-    font-family: var(--font-serif);
-    font-size: 2.1rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.38em;
     text-transform: uppercase;
-    color: var(--text-2);
+    color: var(--text-3);
     white-space: nowrap;
   }
 
@@ -93,7 +96,7 @@ title: Home
     content: '';
     position: absolute;
     left: 0; top: 0; bottom: 0;
-    width: 2px;
+    width: 3px;
     background: var(--accent);
     transform: scaleY(0);
     transform-origin: bottom;
@@ -101,8 +104,8 @@ title: Home
   }
 
   .article-card:hover {
-    border-color: rgba(184, 147, 90, 0.38);
-    box-shadow: 0 4px 28px rgba(184, 147, 90, 0.07), 0 1px 6px rgba(28, 24, 20, 0.04);
+    border-color: rgba(140, 95, 24, 0.4);
+    box-shadow: 0 6px 36px rgba(140, 95, 24, 0.09), 0 1px 6px rgba(12, 10, 7, 0.05);
   }
 
   .article-card:hover::before { transform: scaleY(1); }
@@ -197,52 +200,27 @@ title: Home
   .service-block:first-of-type { padding-top: 0; }
   .service-block:last-of-type { border-bottom: none; }
 
-  .service-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    overflow: hidden;
-    margin: 0 0 3rem;
-    border: 1px solid var(--border);
-  }
-
-  .service-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .service-image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 4rem 3.5rem 2.5rem;
-    background: linear-gradient(transparent, rgba(20, 16, 12, 0.62));
-    display: flex;
-    align-items: flex-end;
-    gap: 1.75rem;
-  }
-
   .service-number {
-    font-size: 0.62rem;
+    display: block;
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
     font-weight: 300;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(249, 247, 243, 0.55);
-    flex-shrink: 0;
-    padding-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+    color: rgba(140, 95, 24, 0.22);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    grid-column: 1;
   }
 
   .service-title {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
     font-weight: 300;
-    color: #f9f7f3;
-    line-height: 1.1;
+    color: var(--text-1);
+    line-height: 1.05;
     letter-spacing: 0.01em;
-    margin: 0;
+    margin: 0 0 1.25rem;
+    grid-column: 1;
   }
 
   .service-content {
@@ -282,7 +260,7 @@ title: Home
     list-style: none;
     margin-bottom: 2rem;
     grid-column: 2;
-    grid-row: 1 / 4;
+    grid-row: 1 / -1;
   }
 
   .service-includes li {
@@ -325,22 +303,9 @@ title: Home
 
   @media (max-width: 900px) {
     .service-block { padding: 3rem 0; }
-    .service-image { aspect-ratio: 4 / 3; margin-bottom: 2rem; }
-    .service-image-caption { padding: 3rem 1.5rem 1.5rem; gap: 1rem; }
-    .service-title { font-size: clamp(1.75rem, 6vw, 2.25rem); }
     .service-content { grid-template-columns: 1fr; column-gap: 0; }
-    .service-subtitle, .service-desc, .service-cta { grid-column: 1; }
+    .service-number, .service-title, .service-subtitle, .service-desc, .service-cta { grid-column: 1; }
     .service-includes { grid-column: 1; grid-row: auto; }
-  }
-
-  @media (max-width: 640px) {
-    .service-image {
-      position: relative;
-      left: calc(-1 * var(--page-pad));
-      width: calc(100% + 2 * var(--page-pad));
-      border-left: none;
-      border-right: none;
-    }
   }
 
   /* ── About ───────────────────────────────────────────── */
@@ -363,15 +328,15 @@ title: Home
 
   @media (max-width: 640px) {
     .articles-grid { grid-template-columns: 1fr; }
-    .hero { padding-bottom: 2.5rem; margin-bottom: 2.5rem; }
+    .hero { padding: 2rem 0 3rem; margin-bottom: 3rem; }
   }
 </style>
 
 <section class="hero">
-  <span class="hero-eyebrow" data-i18n="tagline">Interior Design &amp; Architecture</span>
+  <span class="hero-eyebrow" data-i18n="tagline">Build &middot; Design &middot; Project Management</span>
   <h1 class="hero-heading">
-    <span data-i18n="heroLine1">Spaces that</span><br>
-    <em data-i18n="heroEm">speak to the soul.</em>
+    <span data-i18n="heroLine1">Built with</span><br>
+    <em data-i18n="heroEm">precision and purpose.</em>
   </h1>
   <p class="hero-sub" data-i18n="heroSub">{{ site.description }}</p>
 </section>
@@ -383,66 +348,51 @@ title: Home
   </div>
 
   <div class="service-block">
-    <figure class="service-image">
-      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1440&h=630&fit=crop&crop=center&auto=format" alt="Interior design project with natural light and elegant finishes">
-      <div class="service-image-caption">
-        <span class="service-number">01</span>
-        <h2 class="service-title" data-i18n="s1title">Full Project</h2>
-      </div>
-    </figure>
     <div class="service-content">
-      <span class="service-subtitle" data-i18n="s1sub">Design &middot; Construction &middot; Management</span>
-      <p class="service-desc" data-i18n="s1desc">From the first sketch to the final finish, we guide every phase of your project. Our comprehensive service covers spatial planning, material selection, contractor coordination, and on-site management &mdash; ensuring your vision is realised with precision and care, on time and to budget.</p>
+      <span class="service-number">01</span>
+      <h2 class="service-title" data-i18n="s1title">Build</h2>
+      <span class="service-subtitle" data-i18n="s1sub">From Groundwork to Handover</span>
+      <p class="service-desc" data-i18n="s1desc">We manage the full construction process from site preparation through to final handover. Our build service coordinates every trade, supplier, and inspection &mdash; keeping your project on programme and on budget without compromise.</p>
       <ul class="service-includes">
-        <li data-i18n="s1i1">Concept design &amp; spatial planning</li>
-        <li data-i18n="s1i2">Material, finish &amp; furniture specification</li>
-        <li data-i18n="s1i3">Contractor sourcing &amp; coordination</li>
-        <li data-i18n="s1i4">Construction oversight &amp; site visits</li>
-        <li data-i18n="s1i5">Final delivery &amp; styling</li>
+        <li data-i18n="s1i1">Site preparation &amp; groundworks</li>
+        <li data-i18n="s1i2">Structural &amp; civil works</li>
+        <li data-i18n="s1i3">MEP coordination</li>
+        <li data-i18n="s1i4">Construction management</li>
+        <li data-i18n="s1i5">Final inspection &amp; handover</li>
       </ul>
-      <a href="mailto:contact@helena.studio" class="service-cta" data-i18n="s1cta">Start a project</a>
+      <a href="mailto:contact@helena.studio" class="service-cta" data-i18n="s1cta">Start a build</a>
     </div>
   </div>
 
   <div class="service-block">
-    <figure class="service-image">
-      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1440&h=630&fit=crop&crop=center&auto=format" alt="Modern architectural interior with clean lines and premium materials">
-      <div class="service-image-caption">
-        <span class="service-number">02</span>
-        <h2 class="service-title" data-i18n="s2title">Turnkey Design</h2>
-      </div>
-    </figure>
     <div class="service-content">
-      <span class="service-subtitle" data-i18n="s2sub">For Constructors &amp; Developers</span>
-      <p class="service-desc" data-i18n="s2desc">We partner with construction companies and developers to deliver complete interior design packages ready for immediate execution. Our documentation, specifications, and material schedules are built for efficiency &mdash; allowing your teams to build with confidence from day one.</p>
+      <span class="service-number">02</span>
+      <h2 class="service-title" data-i18n="s2title">Design</h2>
+      <span class="service-subtitle" data-i18n="s2sub">Architecture &middot; Interiors &middot; Technical</span>
+      <p class="service-desc" data-i18n="s2desc">From concept to construction drawings, we develop designs that are as technically rigorous as they are considered. We handle everything from planning applications to detailed interior specifications, ready for immediate execution.</p>
       <ul class="service-includes">
-        <li data-i18n="s2i1">Full design documentation &amp; technical drawings</li>
-        <li data-i18n="s2i2">Material &amp; product schedules</li>
-        <li data-i18n="s2i3">Supplier coordination</li>
-        <li data-i18n="s2i4">Fit-out ready handover package</li>
+        <li data-i18n="s2i1">Concept design &amp; feasibility</li>
+        <li data-i18n="s2i2">Architectural drawings &amp; permits</li>
+        <li data-i18n="s2i3">Interior spatial planning</li>
+        <li data-i18n="s2i4">Technical specifications &amp; schedules</li>
       </ul>
-      <a href="mailto:contact@helena.studio" class="service-cta" data-i18n="s2cta">Work with us</a>
+      <a href="mailto:contact@helena.studio" class="service-cta" data-i18n="s2cta">Start a design</a>
     </div>
   </div>
 
   <div class="service-block">
-    <figure class="service-image">
-      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1440&h=630&fit=crop&crop=center&auto=format" alt="Interior design consultation with architectural drawings and materials">
-      <div class="service-image-caption">
-        <span class="service-number">03</span>
-        <h2 class="service-title" data-i18n="s3title">Consulting</h2>
-      </div>
-    </figure>
     <div class="service-content">
-      <span class="service-subtitle" data-i18n="s3sub">Expert Guidance, On Demand</span>
-      <p class="service-desc" data-i18n="s3desc">Not every project requires a full design engagement. Our consulting service provides targeted expertise &mdash; space planning, material advice, project review, or a second opinion &mdash; delivered with the depth of a full studio relationship and the flexibility to meet you where you are.</p>
+      <span class="service-number">03</span>
+      <h2 class="service-title" data-i18n="s3title">Project Management</h2>
+      <span class="service-subtitle" data-i18n="s3sub">Planning &middot; Coordination &middot; Delivery</span>
+      <p class="service-desc" data-i18n="s3desc">Not every project needs a full engagement. Our project management service provides focused oversight &mdash; programme planning, cost control, contractor management, and client reporting &mdash; at whatever level of involvement your project requires.</p>
       <ul class="service-includes">
-        <li data-i18n="s3i1">Space planning &amp; layout review</li>
-        <li data-i18n="s3i2">Material &amp; palette advice</li>
-        <li data-i18n="s3i3">Project audit &amp; troubleshooting</li>
-        <li data-i18n="s3i4">Single session or ongoing retainer</li>
+        <li data-i18n="s3i1">Programme planning &amp; scheduling</li>
+        <li data-i18n="s3i2">Budget control &amp; cost reporting</li>
+        <li data-i18n="s3i3">Contractor &amp; supplier management</li>
+        <li data-i18n="s3i4">Risk management &amp; progress reporting</li>
       </ul>
-      <a href="mailto:contact@helena.studio" class="service-cta" data-i18n="s3cta">Book a session</a>
+      <a href="mailto:contact@helena.studio" class="service-cta" data-i18n="s3cta">Talk to us</a>
     </div>
   </div>
 </section>
@@ -455,9 +405,9 @@ title: Home
 
   <div class="about-content">
     <div class="about-text">
-      <p data-i18n="aboutP1">Helena is an interior design and architecture studio founded on the belief that spaces should reflect the people who inhabit them. With over a decade of experience across residential, commercial, and hospitality projects, we bring a thoughtful, detail-oriented approach to every commission.</p>
-      <p data-i18n="aboutP2">Our work balances timeless elegance with contemporary sensibility — drawing on classical principles while embracing modern materials and techniques. We collaborate closely with clients, craftsmen, and contractors to ensure that every project is realised with precision and care.</p>
-      <p data-i18n="aboutP3">Based in Geneva, we work across Switzerland and internationally, bringing the same level of attention and craftsmanship to every scale of project, from intimate residential renovations to large-scale commercial developments.</p>
+      <p data-i18n="aboutP1">Helena is a build, design and project management firm founded on the principle that exceptional outcomes require exceptional coordination. We manage every phase of a project — from early design through to construction completion — with the same level of attention and discipline.</p>
+      <p data-i18n="aboutP2">Our team brings together expertise across architecture, construction, and programme management. We work closely with clients, contractors, and consultants to ensure that every project is delivered on time, within budget, and to the highest standard.</p>
+      <p data-i18n="aboutP3">Based in Geneva, we operate across Switzerland and internationally, delivering projects of all scales — from boutique commercial fit-outs to large mixed-use developments.</p>
     </div>
   </div>
 </section>
