@@ -349,19 +349,6 @@ title: Home
   }
 
   .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-
-  .about-image {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: center top;
-    border: 1px solid var(--border);
-    display: block;
   }
 
   .about-text {
@@ -373,19 +360,6 @@ title: Home
   }
 
   .about-text p { margin-bottom: 1.4rem; }
-
-  @media (max-width: 900px) {
-    .about-content { grid-template-columns: 1fr; gap: 2.5rem; }
-    .about-image { aspect-ratio: 4 / 3; }
-  }
-
-  @media (max-width: 640px) {
-    .about-image {
-      position: relative;
-      left: calc(-1 * var(--page-pad));
-      width: calc(100% + 2 * var(--page-pad));
-    }
-  }
 
   @media (max-width: 640px) {
     .articles-grid { grid-template-columns: 1fr; }
@@ -485,7 +459,6 @@ title: Home
       <p data-i18n="aboutP2">Our work balances timeless elegance with contemporary sensibility — drawing on classical principles while embracing modern materials and techniques. We collaborate closely with clients, craftsmen, and contractors to ensure that every project is realised with precision and care.</p>
       <p data-i18n="aboutP3">Based in Geneva, we work across Switzerland and internationally, bringing the same level of attention and craftsmanship to every scale of project, from intimate residential renovations to large-scale commercial developments.</p>
     </div>
-    <img src="{{ '/assets/images/helena.jpg' | url }}" alt="Helena studio" class="about-image">
   </div>
 </section>
 
