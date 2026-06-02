@@ -16,8 +16,9 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("articles/**/*.md").reverse();
   });
 
-  // Passthrough copy for static assets
+  // Passthrough copy for static assets and GitHub Pages custom domain
   eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("CNAME");
 
   return {
     dir: {
